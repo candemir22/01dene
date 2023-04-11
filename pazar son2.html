@@ -1,0 +1,36 @@
+﻿<div class='search_container'>
+ 
+  <input type='button' id="button" value='Başla' onclick='startRecording();'>
+
+
+
+
+</div>
+<div id="ARAMA"></div>
+<div id="ANLASILAN"></div> 
+<div id="ANLASILANIN SESI"></div>
+<img id="myImage" onclick="changeImage()" src="KAZAN.jpg" width="100" height="180">
+
+ 
+
+<script>
+function startRecording(){ algila.start(); }
+var algila = new webkitSpeechRecognition();{
+algila.onresult = function(event) 
+{ for (var i = event.resultIndex; i < event.results.length; i++) 
+{if (event.results[i].isFinal) { neDedi = event.results[i][0].transcript;} }
+
+
+ document.getElementById("ARAMA").innerHTML="SAIT SISTEM ARAMA YAZILIMI = "+neDedi;
+document.getElementById("ANLASILAN").innerHTML=neDedi +".jpg" ;
+document.getElementById("ANLASILANIN SESI").innerHTML=neDedi +".wav" ;
+
+window.speechSynthesis.speak(new SpeechSynthesisUtterance('aradığınız parçanın adı' +neDedi));
+
+var image = document.getElementById("myImage");
+image.src = document.getElementById("ANLASILAN").innerHTML;
+
+}}
+</script>
+
+
